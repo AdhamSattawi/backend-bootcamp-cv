@@ -1,4 +1,4 @@
-from ex2.temperature_converter_with_validation import convert_temperature
+from ex2_control_flow_types.temperature_converter_with_validation import convert_temperature
 import pytest
 
 def test_converting_C_to_K():

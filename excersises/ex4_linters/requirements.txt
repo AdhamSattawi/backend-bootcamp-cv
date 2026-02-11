@@ -1,5 +1,3 @@
-pytest
-cryptography==46.0.4
 black
 flake8
 wemake-python-styleguide

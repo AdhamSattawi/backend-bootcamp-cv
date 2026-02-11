@@ -1,4 +1,4 @@
-from ex2.student_grade_classifier import classify_grade
+from ex2_control_flow_types.student_grade_classifier import classify_grade
 import pytest
 
 

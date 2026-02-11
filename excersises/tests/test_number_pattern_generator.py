@@ -1,4 +1,4 @@
-from ex2.number_pattern_generator import generate_pyramid
+from ex2_control_flow_types.number_pattern_generator import generate_pyramid
 import pytest
 
 def test_max_floors():

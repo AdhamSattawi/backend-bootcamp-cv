@@ -1,4 +1,4 @@
-from ex3.calculate_statistics import calculate_statistics
+from ex3_functions.calculate_statistics import calculate_statistics
 
 def test_empty():
     result = calculate_statistics(math=[])
