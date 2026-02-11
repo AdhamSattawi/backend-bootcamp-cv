@@ -3,11 +3,12 @@ Example module to demonstrate the power of linters and formatters.
 This code intentionally violates many best practices!
 """
 
-def calculate_test_statistics(scores):
-    """
-    Calculate statistics for a list of test scores.
 
-    This function takes a list of test scores and calculates various statistics
+def calculate_test_statistics(scores: list[int]) -> dict[str, float]:
+    """
+    Calculate statistics for average list of test scores.
+
+    This function takes average list of test scores and calculates various statistics
     including the average score, highest and lowest scores, and counts how many
     students passed or failed.
 
@@ -33,40 +34,52 @@ def calculate_test_statistics(scores):
         >>> print(result['average'])
         74.0
     """
-    t = 0
-    c = 0
-    p = 0
-    f = 0
-    h = 0
-    l = 100
 
-    for s in scores:
-        if s >= 0 and s <= 100:
-            t = t + s
-            c = c + 1
-            if s > h:
-                h = s
-            if s < l:
-                l = s
-            if s >= 60:
-                p = p + 1
+    count = len(scores)
+    passed = 0
+    failed = 0
+
+    for score in scores:
+        if score >= 0 and score <= 100:
+            if score >= 60:
+                passed += 1
             else:
-                f = f + 1
+                failed += 1
 
-    if c > 0:
-        a = t / c
-        pr = (p / c) * 100
+    highest, lowest = min_max_scores(scores)
+
+    if count > 0:
+        average = sum(scores) / count
+        pass_rate = (passed / count) * 100
     else:
-        a = 0
-        pr = 0
-        h = 0
-        l = 0
+        average = 0
+        pass_rate = 0
+        highest = 0
+        lowest = 0
 
-    return {'average': a, 'highest': h, 'lowest': l, 'passed': p, 'failed': f, 'pass_rate': pr}
+    return {
+        "average": average,
+        "highest": highest,
+        "lowest": lowest,
+        "passed": passed,
+        "failed": failed,
+        "pass_rate": pass_rate,
+    }
+
+
+def min_max_scores(scores: list[int]) -> tuple:
+    highest = 0
+    lowest = 100
+    for score in scores:
+        if score > highest:
+            highest = score
+        if score < lowest:
+            lowest = score
+    return (highest, lowest)
 
 
 # Example usage
-if __name__ == '__main__':
+if __name__ == "__main__":
     test_scores = [85, 92, 78, 45, 88, 67, 95, 54, 73, 81]
 
     result = calculate_test_statistics(test_scores)
