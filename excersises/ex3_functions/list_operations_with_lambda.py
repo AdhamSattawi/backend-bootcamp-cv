@@ -18,6 +18,7 @@ def sort_by_age(people: list[dict]) -> list[dict]:
     people.sort(reverse = True, key = lambda person: person["age"])
     return people
 
-print(filter_adults(people))
-print(get_names(people))
-print(sort_by_age(people))
+if __name__ == "__main__":
+    print(filter_adults(people))
+    print(get_names(people))
+    print(sort_by_age(people))
