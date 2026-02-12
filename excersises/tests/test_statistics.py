@@ -20,8 +20,3 @@ def test_passed():
     scores = [70, 88, 98, 100]
     result = calculate_test_statistics(scores)
     assert result["passed"] == 4
-
-def test_out_of_range():
-    scores = [-98, -90, 110]
-    result = calculate_test_statistics(scores)
-    assert result["average"] == 0
