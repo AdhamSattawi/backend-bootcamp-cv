@@ -1,4 +1,4 @@
-from solution.ex3_extracting_key-value import key_value_extract
+from solution.ex3_extracting_key_value import key_value_extract
 
 def test_key_value():
     key = "account"
