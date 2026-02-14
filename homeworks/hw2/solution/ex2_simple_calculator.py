@@ -1,10 +1,11 @@
-#This is a simple command-line calculator that performs basic arithmetic operations: addition, subtraction, multiplication, and division.
+# This is a simple command-line calculator that performs basic arithmetic operations: addition, subtraction, multiplication, and division.
 
-def parsing_input(user_input: str) -> str: 
+
+def parsing_input(user_input: str) -> str | int | float:
     input_parts = user_input.lower().strip().split()
-    match input_parts[0]: #operation
+    match input_parts[0]:  # operation
         case "add":
-            return add(input_parts[1], input_parts[3]) #number 1 and number 2
+            return add(input_parts[1], input_parts[3])  # number 1 and number 2
         case "subtract":
             return subtract(input_parts[1], input_parts[3])
         case "multiply":
@@ -13,41 +14,40 @@ def parsing_input(user_input: str) -> str:
             return divide(input_parts[1], input_parts[3])
         case "help":
             return help()
-        case _: "Wrong input, Please see 'help'"
+        case _:
+            return "Wrong input, Please see 'help'"
+
 
 def decimal_validation(num1: str, num2: str) -> None:
     if not num1.isdecimal() or not num2.isdecimal():
         raise ValueError("please enter valid numbers.")
-    
-def str_to_int(num1: str, num2: str) -> tuple:
+
+
+def add(num1: str, num2: str) -> str:
     decimal_validation(num1, num2)
-    num1 = int(num1)
-    num2 = int(num2)
-    return (num1, num2)
-    
-def add(num1: str, num2: str) -> int:
-    num1, num2 = str_to_int(num1, num2)
-    result = num1 + num2
+    result = int(num1) + int(num2)
     return f"The answer is {result}"
 
-def subtract(num1: str, num2: str) -> int:
-    num1, num2 = str_to_int(num1, num2)
-    result = num2 - num1 #subtract num1 from num2
-    return f"The answer is {result}"
 
-def multiply(num1: str, num2: str) -> int:
-    num1, num2 = str_to_int(num1, num2)
-    result = num1 * num2
-    return f"The answer is {result}"
-
-def divide(num1: str, num2: str) -> float:
+def subtract(num1: str, num2: str) -> str:
     decimal_validation(num1, num2)
-    num1 = float(num1)
-    num2 = float(num2)
+    result = int(num2) - int(num1)  # subtract num1 from num2
+    return f"The answer is {result}"
+
+
+def multiply(num1: str, num2: str) -> str:
+    decimal_validation(num1, num2)
+    result = int(num1) * int(num2)
+    return f"The answer is {result}"
+
+
+def divide(num1: str, num2: str) -> str:
+    decimal_validation(num1, num2)
     if num2 == 0:
         raise ZeroDivisionError("Can't divide by 0.")
-    result = num1 / num2
+    result = float(num1) / float(num2)
     return f"The answer is {result}"
+
 
 def help() -> str:
     help_text = """
@@ -64,7 +64,8 @@ def help() -> str:
     """
     return help_text
 
-def simple_calculator():
+
+def simple_calculator() -> None:
     print("--- Welcome to MY SIMPLE CALCULATOR---")
     while True:
         print("Please provide the prompt. Type 'help' for syntax or 'exit' to quit.")
@@ -75,6 +76,7 @@ def simple_calculator():
         result = parsing_input(user_input)
         print(result)
         print("=====" * 10)
+
 
 if __name__ == "__main__":
     simple_calculator()
