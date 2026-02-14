@@ -1,4 +1,6 @@
 def type_check(func):
+    """This function validate that both the inputs and the output of the function 
+        match the provided type annotations, raising a TypeError if they do not."""
     def wrapper(*args, **kwargs):
         arg_type_dict = func.__annotations__
         if not supported_types(arg_type_dict):
