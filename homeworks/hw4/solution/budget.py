@@ -49,6 +49,12 @@ class Budget:
             total_expense += expense.amount
         remaning_budget = total_income - total_expense
         return (all_incomes, all_expenses, total_income, total_expense, remaning_budget)
+    
+    def view_incomes(self) -> dict:
+        return self.incomes
+
+    def view_expenses(self) -> dict:
+        return self.expenses
 
     def remove_by_id(self, activity_type: str, activity_id: int) -> Income | Expense | None:
         """This function removes a specific expense or income with it's id from the budget"""
