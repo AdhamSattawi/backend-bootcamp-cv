@@ -1,22 +1,28 @@
-
 class Income:
     """This class defines the income transaction structure."""
+
     def __init__(self, amount: float, description: str) -> None:
         self.amount = amount
         self.description = description
-    def __repr__(self)-> str:
+
+    def __repr__(self) -> str:
         return f"{self.description} (${self.amount})"
+
 
 class Expense:
     """This class defines the expense transaction structure."""
+
     def __init__(self, amount: float, description: str) -> None:
         self.amount = amount
         self.description = description
-    def __repr__(self)-> str:
+
+    def __repr__(self) -> str:
         return f"{self.description} (-${self.amount})"
+
 
 class Budget:
     """This class have all of the operations functions"""
+
     def __init__(self) -> None:
         self.incomes: dict[int, Income] = {}
         self.expenses: dict[int, Expense] = {}
@@ -45,22 +51,20 @@ class Budget:
         """This function shows the summary of the budget"""
         all_incomes = list(self.incomes.values())
         all_expenses = list(self.expenses.values())
-        total_income = 0
-        for income in all_incomes:
-            total_income += income.amount
-        total_expense = 0
-        for expense in all_expenses:
-            total_expense += expense.amount
+        total_income = sum(income.amount for income in all_incomes)
+        total_expense = sum(expense.amount for expense in all_expenses)
         remaning_budget = total_income - total_expense
-        return (all_incomes, all_expenses, total_income, total_expense, remaning_budget)
-    
+        return (total_income, total_expense, remaning_budget)
+
     def view_incomes(self) -> dict:
         return self.incomes
 
     def view_expenses(self) -> dict:
         return self.expenses
 
-    def remove_by_id(self, activity_type: str, activity_id: int) -> Income | Expense | None:
+    def remove_by_id(
+        self, activity_type: str, activity_id: int
+    ) -> Income | Expense | None:
         """This function removes a specific expense or income with it's id from the budget"""
         if activity_type.lower() == "income":
             if activity_id not in self.incomes:
@@ -71,11 +75,14 @@ class Budget:
                 raise ValueError("Item not found")
             return self.expenses.pop(activity_id)
         return None
-    
-    def remove_by_description(self, activity_type: str, description: str) -> Income | Expense:
+
+    def remove_by_description(
+        self, activity_type: str, description: str
+    ) -> Income | Expense:
         """This function removes a specific expense or income with it's description from the budget"""
         search_type = activity_type.lower()
         search_description = description.lower()
+        items_dict: dict[int, Income] | dict[int, Expense]
         if search_type == "income":
             items_dict = self.incomes
         else:
@@ -89,5 +96,3 @@ class Budget:
         """This function clears all the activities from the budget"""
         self.incomes.clear()
         self.expenses.clear()
-        return None
-

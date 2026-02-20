@@ -8,8 +8,9 @@ def welcome_message() -> str:
         """
     return welcome_message
 
+
 def options() -> str:
-    options_message ="""
+    options_message = """
         =========================================
         =============Budget Planner v1===========
 
