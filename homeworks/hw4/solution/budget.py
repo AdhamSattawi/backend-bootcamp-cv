@@ -4,12 +4,16 @@ class Income:
     def __init__(self, amount: float, description: str) -> None:
         self.amount = amount
         self.description = description
+    def __repr__(self)-> str:
+        return f"{self.description} (${self.amount})"
 
 class Expense:
     """This class defines the expense transaction structure."""
     def __init__(self, amount: float, description: str) -> None:
         self.amount = amount
         self.description = description
+    def __repr__(self)-> str:
+        return f"{self.description} (-${self.amount})"
 
 class Budget:
     """This class have all of the operations functions"""
@@ -31,7 +35,7 @@ class Budget:
     def add_expense(self, amount: float, description: str) -> Expense:
         """This function adds the expense amount with the description to the budget"""
         if amount <= 0:
-            raise ValueError("Income amount must be greater than zero.")
+            raise ValueError("expense amount must be greater than zero.")
         new_expense = Expense(amount, description)
         self.expenses[self.expense_id] = new_expense
         self.expense_id += 1
@@ -59,24 +63,27 @@ class Budget:
     def remove_by_id(self, activity_type: str, activity_id: int) -> Income | Expense | None:
         """This function removes a specific expense or income with it's id from the budget"""
         if activity_type.lower() == "income":
-            return self.incomes.pop(activity_id, None)
+            if activity_id not in self.incomes:
+                raise ValueError("Item not found")
+            return self.incomes.pop(activity_id)
         elif activity_type.lower() == "expense":
-            return self.expenses.pop(activity_id, None)
+            if activity_id not in self.expenses:
+                raise ValueError("Item not found")
+            return self.expenses.pop(activity_id)
         return None
     
-    def remove_by_description(self, activity_type: str, description: str) -> Income | Expense | None:
+    def remove_by_description(self, activity_type: str, description: str) -> Income | Expense:
         """This function removes a specific expense or income with it's description from the budget"""
         search_type = activity_type.lower()
         search_description = description.lower()
         if search_type == "income":
-            for key, income in self.incomes.items():
-                if search_description in income.description.lower():
-                    return self.incomes.pop(key, None)
-        elif search_type == "expense":
-            for key, expense in self.expenses.items():
-                if search_description in expense.description.lower():
-                    return self.expenses.pop(key, None)
-        return None
+            items_dict = self.incomes
+        else:
+            items_dict = self.expenses
+        for key, item in items_dict.items():
+            if item.description.lower() == search_description:
+                return items_dict.pop(key)
+        raise ValueError("Item not found!")
 
     def clear_all(self) -> None:
         """This function clears all the activities from the budget"""

@@ -3,7 +3,7 @@ from cli_prints import welcome_message, options
 from handle_actions import handle_action
 from user_input import user_selection
 
-def budget_app_start():
+def budget_app_start() -> None:
     """This function runs the UI"""
     my_budget = Budget()
     print(welcome_message())   
