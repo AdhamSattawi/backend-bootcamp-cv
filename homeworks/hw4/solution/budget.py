@@ -33,6 +33,8 @@ class Budget:
         """This function adds the income amount with the description to the budget"""
         if amount <= 0:
             raise ValueError("Income amount must be greater than zero.")
+        if not description.strip(): 
+            raise ValueError("Description cannot be empty.")
         new_income = Income(amount, description)
         self.incomes[self.income_id] = new_income
         self.income_id += 1
@@ -42,6 +44,8 @@ class Budget:
         """This function adds the expense amount with the description to the budget"""
         if amount <= 0:
             raise ValueError("expense amount must be greater than zero.")
+        if not description.strip(): 
+            raise ValueError("Description cannot be empty.")
         new_expense = Expense(amount, description)
         self.expenses[self.expense_id] = new_expense
         self.expense_id += 1
