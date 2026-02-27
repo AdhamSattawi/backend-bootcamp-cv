@@ -1,4 +1,4 @@
-from validations.validations import valid_option, valid_adding, valid_id, valid_description
+from validations.validations import valid_option, valid_adding, valid_id
 
 
 def user_selection() -> int:

@@ -33,7 +33,7 @@ def view_expense(my_budget: Budget) -> None:
 def view_summary(my_budget: Budget) -> None:
     incomes = my_budget.view_incomes()
     expenses = my_budget.view_expenses()
-    print("----------EXPENSES---------")
+    print("----------SUMMARY---------")
     total_income, total_expense, remaning_budget = (
         my_budget.view_summary()
     )

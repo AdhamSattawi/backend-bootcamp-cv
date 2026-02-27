@@ -1,6 +1,6 @@
-from cli_prints import welcome_message, options
-from handler.handle_actions import handle_action
-from user_input import user_selection
+from user_interface.cli_prints import welcome_message, options
+from handler.handle_actions_api import handle_action
+from user_interface.user_input import user_selection
 
 
 def budget_app_start() -> None:

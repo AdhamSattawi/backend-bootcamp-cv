@@ -44,6 +44,21 @@ async def summary_api() -> dict:
         "Remaning Budget": remaning_budget,
     }
 
+@app.get("/income")
+async def view_incomes() -> dict:
+    incomes = my_budget.view_incomes()
+    incomes_dict = {}
+    for id, income in incomes.items():
+        incomes_dict[id] = {"amount" : income.amount, "description" : income.description}
+    return incomes_dict
+
+@app.get("/expense")
+async def view_expenses() -> dict:
+    expenses = my_budget.view_expenses()
+    expenses_dict = {}
+    for id, income in expenses.items():
+        expenses_dict[id] = {"amount" : income.amount, "description" : income.description}
+    return expenses_dict
 
 if __name__ == "__main__":
-    uvicorn.run("budget_planner_api:app", reload=True)
+    uvicorn.run("budget_app_api.budget_planner_api:app", reload=True)
